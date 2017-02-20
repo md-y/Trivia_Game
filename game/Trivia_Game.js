@@ -9,28 +9,28 @@ function preload() {
 
 function setup() {
   createCanvas(displayWidth, 500);
-  var elementY = displayHeight - 150;
+  background(75);
   
   opentdbElement = createA("https://opentdb.com/", "Powered by Open Trivia Database");
-  opentdbElement.position(width - 250, elementY);
+  opentdbElement.position(850, height);
   
   typeElement = createSelect();
-  typeElement.position(20, elementY);
+  typeElement.position(20, height);
   typeElement.size(200, 30);
   typeElement.html(html[0]); //Options
   
   difficultyElement = createSelect(); 
-  difficultyElement.position(220, elementY);
+  difficultyElement.position(220, height);
   difficultyElement.size(100, 30);
   difficultyElement.html(html[1]); //Options
   
   categoryElement = createSelect();
-  categoryElement.position(320, elementY);
+  categoryElement.position(320, height);
   categoryElement.size(400, 30);
   categoryElement.html(html[2]); //Options
   
   submitButton = createButton("Get Question");
-  submitButton.position(740, elementY);
+  submitButton.position(740, height);
   submitButton.size(100, 30);
   submitButton.mousePressed(submit);
 }
