@@ -1,17 +1,17 @@
 var api = "https://opentdb.com/"
-var question, token; //For api
+var question, token; //Set by functions
 var typeElement, difficultyElement, categoryElement, submitButton, questionDiv, questionRadio, answerDiv, html, opentdbElement; //Elements
 
 function preload() {
    html = loadStrings("select_options.txt");
-   token = loadStrings("token.txt");
+   loadJSON(api + "api_token.php?command=request", parseToken);
 }
 
 function setup() {
   createCanvas(displayWidth, 500);
   background(75);
   
-  opentdbElement = createA("https://opentdb.com/", "Powered by Open Trivia Database");
+  opentdbElement = createA(api, "Powered by Open Trivia Database");
   opentdbElement.position(850, height);
   
   typeElement = createSelect();
@@ -48,13 +48,14 @@ function submit() {
 }
 
 function setQuestion(type, difficulty, category) {
-  loadJSON(api + "api.php?amount=1&difficulty=" + difficulty+ "&type=" + type + "&category=" + category + "&token=" + token[0], parseQuestion);
+  loadJSON(api + "api.php?amount=1&encode=base64&difficulty=" + difficulty+ "&type=" + type + "&category=" + category + "&token=" + token, parseQuestion);
 }
 
 function parseQuestion(data) {
    switch(data.response_code) {
      case 0:
        question = data.results[0];
+       decodeQuestion();
        displayQuestion();
      break;
      case 4:
@@ -62,6 +63,15 @@ function parseQuestion(data) {
        setQuestion(typeElement.value(), difficultyElement.value(), categoryElement.value());
      break;
    }
+}
+
+function decodeQuestion() {
+  question.type = atob(question.type);
+  question.question = atob(question.question);
+  question.correct_answer = atob(question.correct_answer);
+  for (var i = 0; i < question.incorrect_answers.length; i++) {
+    question.incorrect_answers[i] = atob(question.incorrect_answers[i]);
+  }
 }
 
 function displayQuestion() {
@@ -99,9 +109,9 @@ function checkAnswer() {
 
 
 function resetToken() {
-  loadJSON(api + "api_token.php?command=reset&token=" + token[0], parseToken);
+  loadJSON(api + "api_token.php?command=reset&token=" + token, parseToken);
 }
 
 function parseToken(data) {
-  token[0] = data.token;
+  token = data.token;
 }
