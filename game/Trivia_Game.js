@@ -36,6 +36,7 @@ function setup() {
 }
 
 function submit() {
+<<<<<<< HEAD
     setQuestion(typeElement.value(), difficultyElement.value(), categoryElement.value());
     
     if (questionDiv != null && questionRadio != null) {
@@ -45,6 +46,17 @@ function submit() {
     if (answerDiv != null) {
       answerDiv.remove(); 
     }
+=======
+  setQuestion(typeElement.value(), difficultyElement.value(), categoryElement.value());
+   
+  if (questionDiv != null && questionRadio != null) {
+    questionDiv.remove();
+    questionRadio.remove();
+  }
+  if (answerDiv != null) {
+    answerDiv.remove(); 
+  }
+>>>>>>> origin/master
 }
 
 function setQuestion(type, difficulty, category) {
@@ -74,7 +86,7 @@ function decodeQuestion() {
   }
 }
 
-function displayQuestion() {
+function displayQuestion() {   
   questionDiv = createDiv("<h1>" + question.question + "</h1>");
   questionDiv.size(width - 200, height/4);
   questionDiv.position(100, 20);
