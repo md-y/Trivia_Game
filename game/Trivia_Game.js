@@ -8,11 +8,11 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(displayWidth, 500);
-  background(75);
+  createCanvas(window.innerWidth - 10, window.innerHeight - 40);
+  background(color(10, 100, 100));
   
   opentdbElement = createA(api, "Powered by Open Trivia Database");
-  opentdbElement.position(850, height);
+  opentdbElement.position(820, height);
   
   typeElement = createSelect();
   typeElement.position(20, height);
@@ -30,25 +30,26 @@ function setup() {
   categoryElement.html(html[2]); //Options
   
   submitButton = createButton("Get Question");
-  submitButton.position(740, height);
+  submitButton.position(720, height);
   submitButton.size(100, 30);
   submitButton.mousePressed(submit);
 }
 
 function submit() {
-  setQuestion(typeElement.value(), difficultyElement.value(), categoryElement.value());
-  
-  if (questionDiv != null && questionRadio != null) {
-    questionDiv.remove();
-    questionRadio.remove();
-  }
-  if (answerDiv != null) {
-    answerDiv.remove(); 
-  }
+    setQuestion(typeElement.value(), difficultyElement.value(), categoryElement.value());
+    
+    if (questionDiv != null && questionRadio != null) {
+      questionDiv.remove();
+      questionRadio.remove();
+    }
+    if (answerDiv != null) {
+      answerDiv.remove(); 
+    }
 }
 
 function setQuestion(type, difficulty, category) {
-  loadJSON(api + "api.php?amount=1&encode=base64&difficulty=" + difficulty+ "&type=" + type + "&category=" + category + "&token=" + token, parseQuestion);
+  submitButton.hide();
+  loadJSON(api + "api.php?amount=1&difficulty=" + difficulty+ "&type=" + type + "&category=" + category + "&token=" + token, parseQuestion);
 }
 
 function parseQuestion(data) {
@@ -66,11 +67,10 @@ function parseQuestion(data) {
 }
 
 function decodeQuestion() {
-  question.type = atob(question.type);
-  question.question = atob(question.question);
-  question.correct_answer = atob(question.correct_answer);
+  question.question = he.decode(question.question);
+  question.correct_answer = he.decode(question.correct_answer);
   for (var i = 0; i < question.incorrect_answers.length; i++) {
-    question.incorrect_answers[i] = atob(question.incorrect_answers[i]);
+    question.incorrect_answers[i] = he.decode(question.incorrect_answers[i]);
   }
 }
 
@@ -93,6 +93,8 @@ function displayQuestion() {
   
   questionRadio.position(100, 200);
   questionRadio.changed(checkAnswer);
+  
+  submitButton.show();
 }
 
 function checkAnswer() {
