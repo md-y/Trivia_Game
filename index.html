@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <script type="text/javascript" src="game.js"></script>
+    <title>Trivia Game!</title>
+</head>
+<body>
+    <h1 id="question">Click "Get Question"</h1>
+    <span id="answerArea">
+        <!-- Children Added Once Requested -->
+    </span>
+    <span id="questionButton" onclick="GetQuestion()">
+        <h3>Get Question</h3>
+    </span>
+    <div id="optionMenu">
+        <h4>Options <i id="optionCaret" class="fas fa-caret-up"></i></h4>
+        <h6>Choose All That Apply</h6>
+        <h4>Categories</h4>
+        <div id="categories" class="optionArea">
+            <!-- Children added upon loading -->
+        </div>
+        <h4>Type</h4>
+        <div id="type" class="optionArea">
+            <a href="#"><section class="option selected" id="tof" onclick="ToggleOption(this);"><h5>True or False</h5></section></a>
+            <a href="#"><section class="option selected" id="mul" onclick="ToggleOption(this);"><h5>Multiple Choice</h5></section></a>
+        </div>
+        <h4>Difficulty</h4>
+        <div id="difficulty" class="optionArea">
+            <a href="#"><section class="option" id="easy" onclick="ToggleOption(this);"><h5>Easy</h5></section></a>
+            <a href="#"><section class="option selected" id="medium" onclick="ToggleOption(this);"><h5>Medium</h5></section></a>
+            <a href="#"><section class="option" id="hard" onclick="ToggleOption(this);"><h5>Hard</h5></section></a>
+        </div>
+        <h6>Powered by <a class="link" href="https://opentdb.com/">OpenTDB</a></h6>
+    </div>
+</body>
+</html>
