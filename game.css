@@ -36,7 +36,7 @@ a {
     overflow-x: hidden;
 }
 
-#optionMenu:hover {
+#optionMenu[open="true"] {
     height: 50%;
 }
 
@@ -45,7 +45,7 @@ a {
     transition: transform 0.25s;
 }
 
-#optionMenu:hover i {
+#optionMenu[open="true"] i {
     transform: rotate(180deg);
 }
 

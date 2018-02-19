@@ -16,8 +16,10 @@
     <span id="questionButton" onclick="GetQuestion()">
         <h3>Get Question</h3>
     </span>
-    <div id="optionMenu">
-        <h4>Options <i id="optionCaret" class="fas fa-caret-up"></i></h4>
+    <div id="optionMenu" open="false">
+        <h4 onclick="optionMenuElement.setAttribute('open', optionMenuElement.getAttribute('open') == 'true' ? 'false' : 'true');"> Options 
+            <i id="optionCaret" class="fas fa-caret-up"></i>
+        </h4>
         <h6>Choose All That Apply</h6>
         <h4>Categories</h4>
         <div id="categories" class="optionArea">

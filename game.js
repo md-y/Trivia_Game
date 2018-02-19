@@ -7,6 +7,7 @@ const questionsPerRequest = "3";
 var sentRequests = 0;
 var currentQuestion;
 var answerAreaElement;
+var optionMenuElement;
 var questionElement;
 var enabledArgs = {
     "type": {
@@ -23,6 +24,14 @@ var enabledArgs = {
 
 window.onload = function()
 {
+    optionMenuElement = document.getElementById("optionMenu");
+    optionMenuElement.addEventListener("mouseenter", (event) => {
+        optionMenuElement.setAttribute("open", "true");
+    }, false);
+    optionMenuElement.addEventListener("mouseleave", (event) => {
+        optionMenuElement.setAttribute("open", "false");
+    }, false);
+
     categoriesElement = document.getElementById("categories");
     answerAreaElement = document.getElementById("answerArea");
     questionElement = document.getElementById("question");
